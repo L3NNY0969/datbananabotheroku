@@ -47,11 +47,10 @@ class CR:
     async def crprofile(self, ctx, crtag=None):
         """Gets those sweet Stats for CR...Usage: *crprofile [tag]"""
         if crtag is None:
-            try:
-                x = await self.bot.db.datbananabot.modlog.find_one({"id": ctx.author.id})
-                crtag = x['tag']
-            except KeyError:
+            x = await self.bot.db.datbananabot.crtags.find_one({"id": ctx.author.id})
+            if x['tag'] is None:
                 return await ctx.send("Uh-oh, no tag found! Use `*crsave [tag]` to save your tag to your Discord account. :x:")
+            crtag = x['tag']
         try:
             profile = await self.client.get_player(crtag)
         except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
@@ -108,11 +107,10 @@ class CR:
     async def crclan(self, ctx, clantag=None):
         """Shows info for a clan. Usage: *crclan [CLAN TAG]"""
         if clantag is None:
-            try:
-                x = await self.bot.db.datbananabot.modlog.find_one({"id": ctx.author.id})
-                crtag = x['tag']
-            except KeyError:
+            x = await self.bot.db.datbananabot.crtags.find_one({"id": ctx.author.id})
+            if x['tag'] is None:
                 return await ctx.send("Uh-oh, no tag found! Use *crsave [tag] to save your tag to your Discord account. :x:")
+            crtag = x['tag']
             try:
                 profile = await self.client.get_player(crtag)
                 clan = await profile.get_clan()
@@ -222,11 +220,10 @@ class CR:
     async def crdeck(self, ctx, crtag=None):
         """What's that deck you got there? Find out!"""
         if crtag is None:
-            try:
-                x = await self.bot.db.datbananabot.modlog.find_one({"id": ctx.author.id})
-                crtag = x['tag']
-            except KeyError:
-                return await ctx.send("Uh-oh, no tag found! Use *cocsave [tag] to save your tag to your Discord account. :x:")
+            x = await self.bot.db.datbananabot.crtags.find_one({"id": ctx.author.id})
+            if x['tag'] is None:
+                return await ctx.send("Uh-oh, no tag found! Use *crsave [tag] to save your tag to your Discord account. :x:")
+            crtag = x['tag']
         try:
             profile = await self.client.get_player(crtag)
         except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
@@ -257,11 +254,10 @@ class CR:
     async def crchests(self, ctx, crtag=None):
         """Get your upcoming chests!"""
         if crtag is None:
-            try:
-                x = await self.bot.db.datbananabot.modlog.find_one({"id": ctx.author.id})
-                crtag = x['tag']
-            except KeyError:
-                return await ctx.send("Uh-oh, no tag found! Use *cocsave [tag] to save your tag to your Discord account. :x:")
+            x = await self.bot.db.datbananabot.crtags.find_one({"id": ctx.author.id})
+            if x['tag'] is None:
+                return await ctx.send("Uh-oh, no tag found! Use *crsave [tag] to save your tag to your Discord account. :x:")
+            crtag = x['tag']
         try:
             profile = await self.client.get_player(crtag)
             chests = await self.client.get_player_chests(crtag)
