@@ -1,0 +1,9 @@
+git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
+clashroyale
+wikipedia
+pygoogling
+git+https://github.com/bananaboy21/lol-talon
+git+https://github.com/bananaboy21/clashofclans
+git+https://github.com/freetnt5852/idioticapi
+youtube_dl
+motor
