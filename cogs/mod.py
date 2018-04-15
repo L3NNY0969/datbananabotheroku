@@ -271,7 +271,7 @@ class mod:
             em.description = f"The bot's prefix for server **{ctx.guild.name}** is set to `{ctx.prefix}`."
             return await ctx.send(embed=em)
         if prefix.lower() == 'clear':
-            await self.bot.db.datbananabot.prefix.insert_one({"id": str(ctx.guild.id), "prefix": "*"})
+            await self.bot.db.datbananabot.prefix.insert_one({"id": str(ctx.guild.id), "prefix": "="})
             em.description = f"The bot's prefix is now set to the default: `*`."
             return await ctx.send(embed=em)
         else:
