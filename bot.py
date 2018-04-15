@@ -17,11 +17,12 @@ from discord.ext import commands
 from motor.motor_asyncio import AsyncIOMotorClient
 
 
+db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 
-def getprefix(bot, message):
-    with open("data/prefix.json") as f:
-        x = json.loads(f.read())
-    pre = x.get(str(message.guild.id), "*")
+
+async def getprefix(bot, message):
+    x = await self.bot.db.datbananabot.prefix.find_one({"id": str(ctx.guild.id)})
+    pre = x.get('prefix', "*")
     return pre 
 
 
@@ -167,7 +168,7 @@ async def on_member_remove(member):
 @bot.event
 async def on_message_delete(message):
     if modlog_check(message.guild.id):
-        x = await bot.db.datbananabot.modlog.find_one({"id": str(member.guild.id)})
+        x = await bot.db.datbananabot.modlog.find_one({"id": str(message.guild.id)})
         try:
             lol = bot.get_channel(x['channel'])
             em = discord.Embed(color=discord.Color(value=0x00ff00), title='Message Deleted')
