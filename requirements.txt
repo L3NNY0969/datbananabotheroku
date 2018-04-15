@@ -7,3 +7,4 @@ git+https://github.com/bananaboy21/clashofclans
 git+https://github.com/freetnt5852/idioticapi
 youtube_dl
 motor
+ezjson
