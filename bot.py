@@ -22,6 +22,8 @@ db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 
 async def getprefix(bot, message):
     x = await db.datbananabot.prefix.find_one({"id": str(message.guild.id)})
+    if x is None:
+        return "="
     pre = x.get('prefix', "=")
     return pre 
 
