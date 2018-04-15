@@ -222,10 +222,10 @@ class mod:
                     x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
                 except asyncio.TimeoutError:
                     return await ctx.send("Request timed out. Please try again.")
-                await self.bot.db.datbananabot.modlog.insert_one({"id": str(ctx.guild.id), "channel": channel, "message": x.content})
+                await self.bot.db.datbananabot.welcome.insert_one({"id": str(ctx.guild.id), "channel": channel, "message": x.content})
                 await ctx.send("Successfully turned on welcome messages for this guild.")
             elif action.lower() == 'off':
-                await self.bot.db.datbananabot.modlog.insert_one({"id": str(ctx.guild.id), "channel": False, "message": None})
+                await self.bot.db.datbananabot.welcome.insert_one({"id": str(ctx.guild.id), "channel": False, "message": None})
                 await ctx.send("Successfully turned off welcome messages for this guild.")
 
 
