@@ -139,7 +139,7 @@ async def on_member_join(member):
         pass
     else:
         lol = bot.get_channel(channel)
-        await lol.send(x['message'].replace('{name}', member.name).replace('{mention}', member.mention).replace('{members}', len(member.guild.members)))
+        await lol.send(x['message'].replace('{name}', member.name).replace('{mention}', member.mention).replace('{members}', str(len(member.guild.members))))
     if modlog_check(member.guild.id):
         x = await bot.db.datbananabot.modlog.find_one({"id": str(member.guild.id)})
         lol = bot.get_channel(x['channel'])
